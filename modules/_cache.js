@@ -2,6 +2,19 @@ import Vue from 'vue';
 
 export default function cache(store) {
 	return {
+		apps() {
+			return store.getters['gestios/apps/list'];
+		},
+		app(appName) {
+			return {
+				data() {
+					return store.getters['gestios/apps/get'](appName);
+				},
+				field(fieldName) {
+					return store.getters['gestios/apps/field'](appName, fieldName);
+				}
+			};
+		},
 		// App Items
 		items(app) {
 			return {

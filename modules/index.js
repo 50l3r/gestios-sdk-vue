@@ -100,43 +100,27 @@ export default function ({ project, url, events }) {
 		},
 		methods: {
 			// List apps
-			async apps(live = false) {
-				const cache = this.$store.getters['gestios/apps/list'];
-				if (Object.keys(cache).length > 0 && !live) return cache;
-
-				await this.$store.dispatch('gestios/apps/list');
-				return this.$store.getters['gestios/apps/list'];
+			async apps() {
+				return this.$store.dispatch('gestios/apps/list');
 			},
 			// Get app
-			app(appName, live = false) {
+			app(appName) {
 				const self = this;
 
 				return {
-					async data() {
-						const cache = self.$store.getters['gestios/apps/get'](appName);
-						if (cache && !live) return cache;
-
-						await self.$store.dispatch('gestios/apps/list');
-						const app = self.$store.getters['gestios/apps/get'](appName);
-						if (app) return app;
-
-						return false;
+					data() {
+						return self.$store.dispatch('gestios/apps/list');
 					},
 					field(fieldName) {
-						if (live) {
-							return new Promise((resolve, reject) => {
-								self.$store.dispatch('gestios/apps/list').then(() => {
-									const field = self.$store.getters['gestios/apps/field'](appName, fieldName);
-									if (field) resolve(field);
-									reject(false);
-								}).catch(() => {
-									reject(false);
-								});
+						return new Promise((resolve, reject) => {
+							self.$store.dispatch('gestios/apps/list').then(() => {
+								const field = self.$store.getters['gestios/apps/field'](appName, fieldName);
+								if (field) resolve(field);
+								reject(false);
+							}).catch(() => {
+								reject(false);
 							});
-						}
-						const field = self.$store.getters['gestios/apps/field'](appName, fieldName);
-						if (field) return field;
-						return false;
+						});
 					}
 				};
 			},

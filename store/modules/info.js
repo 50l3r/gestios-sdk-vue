@@ -51,7 +51,6 @@ const actions = {
 		commit('CLEAR/ITEMS');
 		commit('CLEAR/MEDIA');
 		commit('CLEAR/USERS');
-		commit('CLEAR/FORMS');
 	}
 };
 

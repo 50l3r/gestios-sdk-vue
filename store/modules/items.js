@@ -64,15 +64,14 @@ const mutations = {
 				app,
 				view,
 				results: data,
-				total: 0
+				total
 			});
+		} else if (reset) {
+			Vue.set(st.vault[index], 'results', data);
+			Vue.set(st.vault[index], 'total', total);
 		} else {
-			if (reset) st.vault[index].results = [];
-			st.vault[index].total = total;
-
-			Object.keys(data).forEach((i) => {
-				st.vault[index].results.push(data[i]);
-			});
+			Vue.set(st.vault[index], 'total', total);
+			Vue.set(st.vault[index], 'results', st.vault[index].results.concat(data));
 		}
 	},
 	// Update item if exists
@@ -121,13 +120,17 @@ const actions = {
 			if (!silent) utils.loader.start();
 			const result = await gestios.app(app).list({ page, filters, order, limit });
 			if (!silent) utils.loader.done();
+			if (!view) view = app;
 
 			if (result.ok) {
-				if (!view) view = app;
-
 				commit('GESTIOS/ITEMS/LIST', { view, app, data: result.data, total: result.total, reset });
 				commit('GESTIOS/ITEMS/EDIT', { app, data: result.data, ignore: view });
 
+				return result;
+			}
+
+			if (result.code === 404) {
+				commit('GESTIOS/ITEMS/LIST', { view, app, data: [], total: 0, reset });
 				return result;
 			}
 

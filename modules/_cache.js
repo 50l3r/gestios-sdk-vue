@@ -1,6 +1,4 @@
-import Vue from 'vue';
-
-export default function cache(store) {
+export default function cache(store, vm) {
 	return {
 		apps() {
 			return store.getters['gestios/apps/list'];
@@ -15,10 +13,13 @@ export default function cache(store) {
 				}
 			};
 		},
+		// Views
+		view(view) {
+			return store.getters['gestios/items/list'](view);
+		},
 		// App Items
 		items(app) {
 			return {
-				get list() { return store.getters['gestios/items/list'](app); },
 				get: (id) => store.getters['gestios/items/get'](app, id),
 				add: (params) => store.commit('GESTIOS/ITEMS/ADD', { app, data: params }),
 				edit: ({ id, params }) => store.commit('GESTIOS/ITEMS/EDIT', { app, data: { ...params, _EntityId: id } }),
@@ -65,11 +66,10 @@ export default function cache(store) {
 		// Clean data cache
 		clean() {
 			store.dispatch('cache/clear', { data: true });
+			store.dispatch('gestios/apps/list');
+			store.dispatch('gestios/roles/list');
 
-			Vue.prototype.$gestios.apps(true);
-			Vue.prototype.$gestios.auth.roles();
-
-			this.$emit('message-success', 'Cache limpiada');
+			vm.$emit('message-success', 'Cache limpiada');
 		}
 	};
 }

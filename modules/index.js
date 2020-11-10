@@ -1,12 +1,21 @@
 /* eslint-disable prefer-promise-reject-errors */
 import Vue from 'vue';
+import Vuex from 'vuex';
 import sdk from '../config/gestios';
 
 import cache from './_cache';
 import utils from './_utils';
-import store from '../store';
+import { modules } from '../store';
 
-export default function ({ project, url, events }) {
+Vue.use(Vuex);
+
+export default function ({ project, url, events, store }) {
+	for (let i = 0; i < Object.keys(modules).length; i += 1) {
+		const key = Object.keys(modules)[i];
+		const module = modules[key];
+		store.registerModule(key, module, { preserveState: true });
+	}
+
 	return new Vue({
 		data() {
 			return {
@@ -90,13 +99,15 @@ export default function ({ project, url, events }) {
 			this.$on('message-error', events['message-error']);
 
 			Vue.prototype.$core = this;
-			Vue.prototype.$cache = cache(this.$store);
+			Vue.prototype.$gestios = this;
+
+			Vue.prototype.$cache = cache(this.$store, this);
 			Vue.prototype.$utils = utils(this.$store);
 
 			this.$store.commit('GESTIOS/URL', url);
 			this.$store.commit('GESTIOS/PROJECT', project);
 
-			sdk.token = store.getters['gestios/user'] ? store.getters['gestios/user'].API : '';
+			sdk.token = this.$store.getters['gestios/user'] ? this.$store.getters['gestios/user'].API : '';
 		},
 		methods: {
 			// List apps

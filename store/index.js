@@ -1,5 +1,3 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
 import PersistedState from 'vuex-persistedstate';
 // import Cookies from 'js-cookie';
 
@@ -14,8 +12,6 @@ import items from './modules/items';
 import media from './modules/media';
 import roles from './modules/roles';
 import users from './modules/users';
-
-Vue.use(Vuex);
 
 const modules = {
 	apps,
@@ -78,10 +74,12 @@ const plugins = [
 	// })
 ];
 
-const store = new Vuex.Store({
-	modules,
-	plugins,
-	strict: process.env.NODE_ENV !== 'production'
-});
+export { modules, plugins };
 
-export default store;
+// const store = new Vuex.Store({
+// 	modules,
+// 	plugins,
+// 	strict: process.env.NODE_ENV !== 'production'
+// });
+
+// export default store;

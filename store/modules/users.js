@@ -69,6 +69,11 @@ const actions = {
 				return result;
 			}
 
+			if (result.code === 404) {
+				commit('GESTIOS/ITEMS/LIST', { users: [], total: 0, reset });
+				return result;
+			}
+
 			if (!silent) utils.error(result.message);
 		} catch (err) {
 			if (!silent) utils.loader.done();

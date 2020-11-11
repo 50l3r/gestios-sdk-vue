@@ -31,6 +31,7 @@ export default function ({ project, url, events, store }) {
 				// Users
 				users: {
 					list: ({ page = 1, search = null, limit = 10, reset = false, silent = false } = {}) => this.$store.dispatch('gestios/users/list', { page, search, limit, reset, silent }),
+					get: (id) => this.$store.dispatch('gestios/users/get', id),
 					add: ({ email, nick, name, phone = null, group = null, password = null }) => this.$store.dispatch('gestios/users/add', { email, nick, name, phone, group, password }),
 					edit: ({ id, email, nick, name, phone = null, group = null, password = null }) => this.$store.dispatch('gestios/users/edit', { id, email, nick, name, phone, group, password }),
 					status: (id) => this.$store.dispatch('gestios/users/status', id),

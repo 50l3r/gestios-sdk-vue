@@ -70,7 +70,7 @@ const actions = {
 			}
 
 			if (result.code === 404) {
-				commit('GESTIOS/ITEMS/LIST', { users: [], total: 0, reset });
+				commit('GESTIOS/USERS/LIST', { users: [], total: 0, reset });
 				return result;
 			}
 

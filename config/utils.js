@@ -2,14 +2,14 @@ import Vue from 'vue';
 
 const utils = {
 	message: (text) => {
-		Vue.prototype.$core.$emit('message-success', text);
+		Vue.prototype.$gestios.$emit('message-success', text);
 	},
 	error: (text) => {
-		Vue.prototype.$core.$emit('message-error', text);
+		Vue.prototype.$gestios.$emit('message-error', text);
 	},
 	loader: {
-		start: () => Vue.prototype.$core.$emit('loader-start'),
-		done: () => Vue.prototype.$core.$emit('loader-done')
+		start: () => Vue.prototype.$gestios.$emit('loader-start'),
+		done: () => Vue.prototype.$gestios.$emit('loader-done')
 	}
 };
 

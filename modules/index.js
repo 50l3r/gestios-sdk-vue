@@ -99,11 +99,10 @@ export default function ({ project, url, events, store }) {
 			this.$on('message-success', events['message-success']);
 			this.$on('message-error', events['message-error']);
 
-			Vue.prototype.$core = this;
-			Vue.prototype.$gestios = this;
+			this.$cache = cache(this.$store, this);
+			this.$utils = utils(this.$store);
 
-			Vue.prototype.$cache = cache(this.$store, this);
-			Vue.prototype.$utils = utils(this.$store);
+			Vue.prototype.$gestios = this;
 
 			this.$store.commit('GESTIOS/URL', url);
 			this.$store.commit('GESTIOS/PROJECT', project);

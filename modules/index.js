@@ -1,21 +1,12 @@
 /* eslint-disable prefer-promise-reject-errors */
 import Vue from 'vue';
-import Vuex from 'vuex';
 import sdk from '../config/gestios';
 
 import cache from './_cache';
 import utils from './_utils';
-import { modules } from '../store';
+import store from '../store';
 
-Vue.use(Vuex);
-
-export default function ({ project, url, events, store }) {
-	for (let i = 0; i < Object.keys(modules).length; i += 1) {
-		const key = Object.keys(modules)[i];
-		const module = modules[key];
-		store.registerModule(key, module, { preserveState: true });
-	}
-
+export default function ({ project, url, events }) {
 	return new Vue({
 		data() {
 			return {

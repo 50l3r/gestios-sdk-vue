@@ -39,7 +39,16 @@ export default function cache(store, vm) {
 		get config() {
 			return {
 				get: (key) => store.getters['gestios/config/get'](key),
-				...store.getters['gestios/config/list']
+				async list(key = []) {
+					const results = store.getters['gestios/config/list'](key);
+
+					if (!results || Object.keys(results).length < key.length) {
+						const result = await store.dispatch('gestios/config/list', key);
+						if (result.ok) return result.data;
+					}
+
+					return results;
+				}
 			};
 		},
 

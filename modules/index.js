@@ -11,49 +11,17 @@ export default function ({ project, url, events }) {
 		data() {
 			return {
 				// User auth
-				auth: {
-					login: ({ username, password, project }) => this.$store.dispatch('gestios/auth/login', { username, password, project }),
-					forgot: (email) => this.$store.dispatch('gestios/auth/forgot', email),
-					restore: ({ email, authcode, password }) => this.$store.dispatch('gestios/auth/restore', { email, authcode, password }),
-					logout: () => this.$store.dispatch('gestios/auth/logout'),
-					roles: (id = null) => this.$store.dispatch('gestios/roles/list', id),
-					check: ({ user = null, scopes = [], strict = true }) => this.$store.getters['gestios/roles/check']({ user, scopes, strict })
-				},
+				auth: null,
 				// Users
-				users: {
-					list: ({ page = 1, search = null, limit = 10, reset = false, silent = false } = {}) => this.$store.dispatch('gestios/users/list', { page, search, limit, reset, silent }),
-					get: (id) => this.$store.dispatch('gestios/users/get', id),
-					add: ({ email, nick, name, phone = null, group = null, password = null }) => this.$store.dispatch('gestios/users/add', { email, nick, name, phone, group, password }),
-					edit: ({ id, email, nick, name, phone = null, group = null, password = null }) => this.$store.dispatch('gestios/users/edit', { id, email, nick, name, phone, group, password }),
-					status: (id) => this.$store.dispatch('gestios/users/status', id),
-					delete: (id) => this.$store.dispatch('gestios/users/delete', id)
-				},
+				users: null,
 				// Groups
-				groups: {
-					list: ({ reset = false, silent = false } = {}) => this.$store.dispatch('gestios/groups/list', { reset, silent })
-				},
+				groups: null,
 				// Emails
-				emails: {
-					list: ({ page = 1, folder = null, reset = false, silent = false } = {}) => this.$store.dispatch('gestios/emails/list', { page, folder, reset, silent }),
-					folders: ({ page = 1, reset = true, silent = false }) => this.$store.dispatch('gestios/emails/folders', { page, reset, silent }),
-					send: ({ email, subject, message, cc = [], replyto = '', folder = '' }) => this.$store.dispatch('gestios/emails/send', { email, subject, message, cc, replyto, folder }),
-					delete: (id) => this.$store.dispatch('gestios/emails/delete', id)
-				},
+				emails: null,
 				// Configurations
-				config: {
-					list(keys = []) {
-						return this.$store.dispatch('gestios/config/list', keys);
-					},
-					edit: (keys) => this.$store.dispatch('gestios/config/edit', keys),
-					del: (keys) => this.$store.dispatch('gestios/config/delete', keys)
-				},
+				config: null,
 				// Media files
-				media: {
-					get: (id) => this.$store.dispatch('gestios/media/get', id),
-					share: ({ id, ts }) => this.$store.dispatch('gestios/media/share', { id, ts }),
-					add: ({ file, name, folder = '' }) => this.$store.dispatch('gestios/media/add', { file, name, folder }),
-					delete: (id) => this.$store.dispatch('gestios/media/delete', id)
-				}
+				media: null
 			};
 		},
 		computed: {
@@ -99,6 +67,58 @@ export default function ({ project, url, events }) {
 			this.$store.commit('GESTIOS/PROJECT', project);
 
 			sdk.token = this.$store.getters['gestios/user'] ? this.$store.getters['gestios/user'].API : '';
+		},
+		created() {
+			const self = this;
+
+			this.config = {
+				list(keys = []) {
+					return self.$store.dispatch('gestios/config/list', keys);
+				},
+				edit: (keys) => self.$store.dispatch('gestios/config/edit', keys),
+				del: (keys) => self.$store.dispatch('gestios/config/delete', keys)
+			};
+
+			// User auth
+			this.auth = {
+				login: ({ username, password, project }) => self.$store.dispatch('gestios/auth/login', { username, password, project }),
+				forgot: (email) => self.$store.dispatch('gestios/auth/forgot', email),
+				restore: ({ email, authcode, password }) => self.$store.dispatch('gestios/auth/restore', { email, authcode, password }),
+				logout: () => self.$store.dispatch('gestios/auth/logout'),
+				roles: (id = null) => self.$store.dispatch('gestios/roles/list', id),
+				check: ({ user = null, scopes = [], strict = true }) => self.$store.getters['gestios/roles/check']({ user, scopes, strict })
+			};
+
+			// Users
+			this.users = {
+				list: ({ page = 1, search = null, limit = 10, reset = false, silent = false } = {}) => self.$store.dispatch('gestios/users/list', { page, search, limit, reset, silent }),
+				get: (id) => self.$store.dispatch('gestios/users/get', id),
+				add: ({ email, nick, name, phone = null, group = null, password = null }) => self.$store.dispatch('gestios/users/add', { email, nick, name, phone, group, password }),
+				edit: ({ id, email, nick, name, phone = null, group = null, password = null }) => self.$store.dispatch('gestios/users/edit', { id, email, nick, name, phone, group, password }),
+				status: (id) => self.$store.dispatch('gestios/users/status', id),
+				delete: (id) => self.$store.dispatch('gestios/users/delete', id)
+			};
+
+			// Groups
+			this.groups = {
+				list: ({ reset = false, silent = false } = {}) => self.$store.dispatch('gestios/groups/list', { reset, silent })
+			};
+
+			// Emails
+			this.emails = {
+				list: ({ page = 1, folder = null, reset = false, silent = false } = {}) => self.$store.dispatch('gestios/emails/list', { page, folder, reset, silent }),
+				folders: ({ page = 1, reset = true, silent = false }) => self.$store.dispatch('gestios/emails/folders', { page, reset, silent }),
+				send: ({ email, subject, message, cc = [], replyto = '', folder = '' }) => self.$store.dispatch('gestios/emails/send', { email, subject, message, cc, replyto, folder }),
+				delete: (id) => self.$store.dispatch('gestios/emails/delete', id)
+			};
+
+			// Media files
+			this.media = {
+				get: (id) => self.$store.dispatch('gestios/media/get', id),
+				share: ({ id, ts }) => self.$store.dispatch('gestios/media/share', { id, ts }),
+				add: ({ file, name, folder = '' }) => self.$store.dispatch('gestios/media/add', { file, name, folder }),
+				delete: (id) => self.$store.dispatch('gestios/media/delete', id)
+			};
 		},
 		methods: {
 			// List apps

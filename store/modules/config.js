@@ -64,7 +64,7 @@ const actions = {
 	'gestios/config/edit': async function ({ commit }, keys) {
 		try {
 			utils.loader.start();
-			const result = await gestios.config.set({ keys: JSON.stringify(keys) });
+			const result = await gestios.config.set(keys);
 			utils.loader.done();
 
 			if (result.ok) {

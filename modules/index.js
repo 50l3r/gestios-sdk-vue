@@ -156,7 +156,7 @@ export default function ({ project = '', url, events }) {
 			items(app) {
 				return {
 					list: ({ page = 1, filters = null, order = null, limit = 20, silent = false, reset = false, view = null }) => this.$store.dispatch('gestios/items/list', { app, page, filters, order, limit, silent, reset, view }),
-					get: ({ id, silent = false }) => this.$store.dispatch('gestios/items/get', { app, id, silent }),
+					get: (id, silent = false) => this.$store.dispatch('gestios/items/get', { app, id, silent }),
 					add: ({ params, view = null, callback = null }) => this.$store.dispatch('gestios/items/add', { app, params, view, callback }),
 					edit: ({ id, params, callback = null }) => this.$store.dispatch('gestios/items/edit', { app, id, params, callback }),
 					status: (id) => this.$store.dispatch('gestios/items/status', { app, id }),

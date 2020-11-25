@@ -6,10 +6,12 @@ import cache from './_cache';
 import utils from './_utils';
 import store from '../store';
 
-export default function ({ project, url, events }) {
+export default function ({ project = '', url, events }) {
 	return new Vue({
 		data() {
 			return {
+				// Project info
+				project: null,
 				// User auth
 				auth: null,
 				// Users
@@ -25,14 +27,6 @@ export default function ({ project, url, events }) {
 			};
 		},
 		computed: {
-			project: {
-				get() {
-					return this.$store.getters['gestios/project'];
-				},
-				set(value) {
-					return this.$store.dispatch('gestios/project', value);
-				}
-			},
 			url: {
 				get() {
 					return this.$store.getters['gestios/url'];
@@ -63,6 +57,13 @@ export default function ({ project, url, events }) {
 
 			Vue.prototype.$gestios = this;
 
+			const storedProject = this.$store.getters['gestios/project'];
+
+			if (storedProject) project = storedProject;
+
+			sdk.project = project;
+			sdk.url = url;
+
 			this.$store.commit('GESTIOS/URL', url);
 			this.$store.commit('GESTIOS/PROJECT', project);
 
@@ -70,6 +71,11 @@ export default function ({ project, url, events }) {
 		},
 		created() {
 			const self = this;
+
+			this.project = {
+				name: self.$store.getters['gestios/project'],
+				set: (value) => self.$store.dispatch('gestios/project', value)
+			};
 
 			this.config = {
 				list(keys = []) {

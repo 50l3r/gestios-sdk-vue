@@ -85,7 +85,7 @@ const mutations = {
 					if (index > -1) {
 						const item = view.results[index];
 						const mixedItem = { ...item, ...d };
-						console.log(view, mixedItem);
+
 						view.results.splice(index, 1, mixedItem);
 					}
 				});

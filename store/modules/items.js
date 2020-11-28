@@ -82,7 +82,12 @@ const mutations = {
 			if (view.app === app && ignore !== app) {
 				data.forEach((d) => {
 					const index = view.results.findIndex((item) => item._EntityId === d._EntityId);
-					if (index > -1) view.results.splice(index, 1, d);
+					if (index > -1) {
+						const item = view.results[index];
+						const mixedItem = { ...item, ...d };
+						console.log(view, mixedItem);
+						view.results.splice(index, 1, mixedItem);
+					}
 				});
 			}
 		});

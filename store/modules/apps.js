@@ -54,9 +54,13 @@ const actions = {
 			if (result) {
 				commit('GESTIOS/APPS/LISTS', result);
 				return result;
+			} else {
+				utils.error('No se han encontrado aplicaciones a las que este usuario tenga acceso');
+				return {
+					ok: false,
+					message: 'No se han encontrado aplicaciones a las que este usuario tenga acceso'
+				}
 			}
-
-			utils.error(result.message);
 
 			return result;
 		} catch (err) {

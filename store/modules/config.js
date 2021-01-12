@@ -54,7 +54,7 @@ const actions = {
 				return result;
 			}
 
-			utils.error(result.message);
+			utils.error(result);
 			return false;
 		} catch (err) {
 			console.error('No se pudo obtener los parametros de configuración', err);
@@ -72,7 +72,7 @@ const actions = {
 				return result;
 			}
 
-			utils.error(result.message);
+			utils.error(result);
 		} catch (err) {
 			console.error('No se pudo modificar los parametros de configuración', err);
 		}
@@ -90,7 +90,7 @@ const actions = {
 				return true;
 			}
 
-			utils.error(result.message);
+			utils.error(result);
 		} catch (err) {
 			console.error('No se pudo eliminar los parametros de configuración', err);
 		}

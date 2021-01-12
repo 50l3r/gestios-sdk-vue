@@ -74,10 +74,10 @@ const actions = {
 				return result;
 			}
 
-			if (!silent) utils.error(result.message);
+			if (!silent) utils.error(result);
 		} catch (err) {
 			if (!silent) utils.loader.done();
-			utils.error(err.message);
+			utils.error(err);
 			console.error('No se pudo obtener el listado de usuarios', err);
 		}
 
@@ -97,10 +97,10 @@ const actions = {
 				return result;
 			}
 
-			utils.error(result.message);
+			utils.error(result);
 		} catch (err) {
 			utils.loader.done();
-			utils.error(err.message);
+			utils.error(err);
 			console.error('No se pudo obtener el usuario especificado', err);
 		}
 
@@ -118,10 +118,10 @@ const actions = {
 				return result;
 			}
 
-			utils.error(result.message);
+			utils.error(result);
 		} catch (err) {
 			utils.loader.done();
-			utils.error(err.message);
+			utils.error(err);
 			console.error('No se pudo dar de alta al nuevo usuario', err);
 		}
 
@@ -139,10 +139,10 @@ const actions = {
 				return result;
 			}
 
-			utils.error(result.message);
+			utils.error(result);
 		} catch (err) {
 			utils.loader.done();
-			utils.error(err.message);
+			utils.error(err);
 			console.error('No se pudo dar de alta al nuevo usuario', err);
 		}
 
@@ -160,10 +160,10 @@ const actions = {
 				return result;
 			}
 
-			utils.error(result.message);
+			utils.error(result);
 		} catch (err) {
 			utils.loader.done();
-			utils.error(err.message);
+			utils.error(err);
 			console.error('No se pudo obtener eliminar el usuario', err);
 		}
 
@@ -181,10 +181,10 @@ const actions = {
 				return result;
 			}
 
-			utils.error(result.message);
+			utils.error(result);
 		} catch (err) {
 			utils.loader.done();
-			utils.error(err.message);
+			utils.error(err);
 			console.error('No se pudo obtener eliminar el usuario', err);
 		}
 

@@ -139,7 +139,7 @@ const actions = {
 				return result;
 			}
 
-			if (!silent) utils.error(result.message);
+			if (!silent) utils.error(result);
 			return result;
 		} catch (err) {
 			console.error(`No se pudo obtener los registros de ${app}`, err);
@@ -158,7 +158,7 @@ const actions = {
 				return result;
 			}
 
-			if (!silent) utils.error(result.message);
+			if (!silent) utils.error(result);
 			return result;
 		} catch (err) {
 			if (!silent) utils.loader.done();
@@ -177,11 +177,10 @@ const actions = {
 				if (!view) view = app;
 
 				commit('GESTIOS/ITEMS/ADD', { view, data: result.data });
-
 				return result;
 			}
 
-			utils.error(result.message);
+			utils.error(result);
 			return result;
 		} catch (err) {
 			utils.loader.done();
@@ -201,7 +200,7 @@ const actions = {
 				return result;
 			}
 
-			utils.error(result.message);
+			utils.error(result);
 			return result;
 		} catch (err) {
 			utils.loader.done();
@@ -221,7 +220,7 @@ const actions = {
 				return result;
 			}
 
-			utils.error(result.message);
+			utils.error(result);
 			return result;
 		} catch (err) {
 			utils.loader.done();
@@ -241,7 +240,7 @@ const actions = {
 				return result;
 			}
 
-			utils.error(result.message);
+			utils.error(result);
 			return result;
 		} catch (err) {
 			utils.loader.done();

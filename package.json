@@ -1,6 +1,6 @@
 {
 	"name": "gestios-sdk-vue",
-	"version": "0.31.1",
+	"version": "0.32.1",
 	"description": "GestiOS VUE 2.0 SDK",
 	"main": "index.js",
 	"scripts": {

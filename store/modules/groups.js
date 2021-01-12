@@ -51,10 +51,10 @@ const actions = {
 				return result;
 			}
 
-			if (!silent) utils.error(result.message);
+			if (!silent) utils.error(result);
 		} catch (err) {
 			if (!silent) utils.loader.done();
-			utils.error(err.message);
+			utils.error(err);
 			console.error('No se pudo obtener el listado de grupos', err);
 		}
 

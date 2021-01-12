@@ -10,7 +10,7 @@ const getters = {
 			if (!user) user = gt['gestios/user'];
 			return gestios.roles.check({ user, scopes, strict });
 		} catch (err) {
-			utils.error(err.message);
+			utils.error(err);
 			console.error(`Ocurrió un error al chequear los permisos de ${user.ID}`, err);
 		}
 
@@ -44,10 +44,10 @@ const actions = {
 
 			if (result.ok) return result;
 
-			utils.error(result.message);
+			utils.error(result);
 		} catch (err) {
 			utils.loader.done();
-			utils.error(err.message);
+			utils.error(err);
 			console.error(`No se pudo obtener los roles del usuario #${id}`, err);
 		}
 

@@ -65,9 +65,9 @@ const actions = {
 	// 			return result.data;
 	// 		}
 
-	// 		if (!silent) utils.error(result.message);
+	// 		if (!silent) utils.error(result);
 	// 	} catch (err) {
-	// 		utils.error(err.message);
+	// 		utils.error(err);
 	// 		console.error('No se pudo obtener el listado de ficheros', err);
 	// 	}
 
@@ -85,10 +85,10 @@ const actions = {
 				return result;
 			}
 
-			utils.error(result.message);
+			utils.error(result);
 		} catch (err) {
 			utils.loader.done();
-			utils.error(err.message);
+			utils.error(err);
 			console.error(`No se pudo obtener el fichero #${id}`, err);
 		}
 
@@ -102,10 +102,10 @@ const actions = {
 			utils.loader.done();
 
 			if (result.ok) return result;
-			utils.error(result.message);
+			utils.error(result);
 		} catch (err) {
 			utils.loader.done();
-			utils.error(err.message);
+			utils.error(err);
 			console.error(`No se pudo compartir el fichero #${id}`, err);
 		}
 
@@ -123,10 +123,10 @@ const actions = {
 				return result;
 			}
 
-			utils.error(result.message);
+			utils.error(result);
 		} catch (err) {
 			utils.loader.done();
-			utils.error(err.message);
+			utils.error(err);
 			console.error('No se pudo añadir el fichero', err);
 		}
 
@@ -143,10 +143,10 @@ const actions = {
 				return result;
 			}
 
-			utils.error(result.message);
+			utils.error(result);
 		} catch (err) {
 			utils.loader.done();
-			utils.error(err.message);
+			utils.error(err);
 			console.error(`No se pudo eliminar el fichero #${id}`, err);
 		}
 

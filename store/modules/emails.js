@@ -84,7 +84,7 @@ const actions = {
 				return result;
 			}
 
-			if (!silent) utils.error(result.message);
+			if (!silent) utils.error(result);
 		} catch (err) {
 			if (!silent) utils.loader.done();
 			console.error('No se pudo obtener el listado de emails', err);
@@ -104,7 +104,7 @@ const actions = {
 				return result;
 			}
 
-			if (!silent) utils.error(result.message);
+			if (!silent) utils.error(result);
 		} catch (err) {
 			if (!silent) utils.loader.done();
 			console.error('No se pudo obtener el listado de carpetas', err);
@@ -125,7 +125,7 @@ const actions = {
 				return result;
 			}
 
-			utils.error(result.message);
+			utils.error(result);
 		} catch (err) {
 			utils.loader.done();
 			console.error('No se pudo enviar el email', err);
@@ -145,10 +145,10 @@ const actions = {
 				return result;
 			}
 
-			utils.error(result.message);
+			utils.error(result);
 		} catch (err) {
 			utils.loader.done();
-			utils.error(err.message);
+			utils.error(err);
 			console.error('No se pudo eliminar el email', err);
 		}
 

@@ -48,12 +48,12 @@ export default function ({ project = '', url, events }) {
 				return this.$store.getters['gestios/avatars/get'];
 			}
 		},
-		beforeCreate() {
+		async beforeCreate() {
 			this.$on('message-success', events['message-success']);
 			this.$on('message-error', events['message-error']);
 
 			this.$cache = cache(this.$store, this);
-			this.$utils = utils(this.$store);
+			this.$utils = await utils(this.$store);
 
 			Vue.prototype.$gestios = this;
 

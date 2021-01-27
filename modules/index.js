@@ -53,12 +53,10 @@ export default function ({ project = '', url, events }) {
 			this.$on('message-error', events['message-error']);
 
 			this.$cache = cache(this.$store, this);
-			this.$utils = await utils(this.$store);
 
 			Vue.prototype.$gestios = this;
 
 			const storedProject = this.$store.getters['gestios/project'];
-
 			if (storedProject) project = storedProject;
 
 			sdk.project = project;
@@ -68,8 +66,10 @@ export default function ({ project = '', url, events }) {
 			this.$store.commit('GESTIOS/PROJECT', project);
 
 			sdk.token = this.$store.getters['gestios/user'] ? this.$store.getters['gestios/user'].API : '';
+
+			if (storedProject) this.$utils = await utils(this.$store);
 		},
-		created() {
+		async created() {
 			const self = this;
 
 			this.project = {

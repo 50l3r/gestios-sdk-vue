@@ -1,6 +1,6 @@
 {
 	"name": "gestios-sdk-vue",
-	"version": "0.33.1",
+	"version": "0.33.3",
 	"description": "GestiOS VUE 2.0 SDK",
 	"main": "index.js",
 	"scripts": {
@@ -22,7 +22,7 @@
 		"url": "https://github.com/50l3r/gestios-sdk-vue/issues"
 	},
 	"dependencies": {
-		"gestios-sdk-js": "^0.4.23",
+		"gestios-sdk-js": "^0.7.1",
 		"vue": "^2.6.12",
 		"vuex": "^3.5.1",
 		"vuex-persistedstate": "^4.0.0-beta.1"

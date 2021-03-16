@@ -120,7 +120,7 @@ export default function ({ project = '', url, events }) {
 
 			// Media files
 			this.media = {
-				list: ({ page = 1, limit = 20, order = null, folder = null, type = null, search = null, reset = false, silent = false }) => self.$store.dispatch('gestios/media/list', { page, limit, order, folder, type, search, reset, silent }),
+				list: ({ page = 1, limit = 20, order = null, folder = null, type = null, search = null, reset = false, silent = false } = {}) => self.$store.dispatch('gestios/media/list', { page, limit, order, folder, type, search, reset, silent }),
 				get: (id) => self.$store.dispatch('gestios/media/get', id),
 				share: ({ id, ts }) => self.$store.dispatch('gestios/media/share', { id, ts }),
 				add: ({ file, name, folder = '' }) => self.$store.dispatch('gestios/media/add', { file, name, folder }),
@@ -156,7 +156,7 @@ export default function ({ project = '', url, events }) {
 			// Authentication
 			items(app) {
 				return {
-					list: ({ page = 1, filters = null, order = null, limit = 20, silent = false, reset = false, view = null }) => this.$store.dispatch('gestios/items/list', { app, page, filters, order, limit, silent, reset, view }),
+					list: ({ page = 1, filters = null, order = null, limit = 20, silent = false, reset = false, view = null } = {}) => this.$store.dispatch('gestios/items/list', { app, page, filters, order, limit, silent, reset, view }),
 					get: (id, silent = false) => this.$store.dispatch('gestios/items/get', { app, id, silent }),
 					add: ({ params, view = null, callback = null }) => this.$store.dispatch('gestios/items/add', { app, params, view, callback }),
 					edit: ({ id, params, callback = null }) => this.$store.dispatch('gestios/items/edit', { app, id, params, callback }),

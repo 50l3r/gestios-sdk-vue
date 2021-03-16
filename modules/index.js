@@ -120,6 +120,7 @@ export default function ({ project = '', url, events }) {
 
 			// Media files
 			this.media = {
+				list: ({ page = 1, limit = 20, order = null, folder = null, type = null, search = null, reset = false, silent = false }) => self.$store.dispatch('gestios/media/list', { page, limit, order, folder, type, search, reset, silent }),
 				get: (id) => self.$store.dispatch('gestios/media/get', id),
 				share: ({ id, ts }) => self.$store.dispatch('gestios/media/share', { id, ts }),
 				add: ({ file, name, folder = '' }) => self.$store.dispatch('gestios/media/add', { file, name, folder }),

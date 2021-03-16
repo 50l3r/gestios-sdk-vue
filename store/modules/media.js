@@ -53,26 +53,25 @@ const mutations = {
 
 const actions = {
 	// List media
-	// 'gestios/media/list': async function({ commit },
-	// { page = 1, reset = false, silent = false } = {}) {
-	// 	try {
-	// 		if (!silent) utils.loader.start();
-	// 		const result = await gestios.media.list({ page });
-	// 		if (!silent) utils.loader.done();
+	'gestios/media/list': async function ({ commit }, { page = 1, limit = 20, order = null, folder = null, type = null, search = null, reset = false, silent = false } = {}) {
+		try {
+			if (!silent) utils.loader.start();
+			const result = await gestios.media.list({ page, limit, order, folder, type, search });
+			if (!silent) utils.loader.done();
 
-	// 		if (result.ok) {
-	// 			commit('GESTIOS/MEDIA/LIST', { media: result.data, total: result.total, reset });
-	// 			return result.data;
-	// 		}
+			if (result.ok) {
+				commit('GESTIOS/MEDIA/LIST', { media: result.data, total: result.total, reset });
+				return result.data;
+			}
 
-	// 		if (!silent) utils.error(result);
-	// 	} catch (err) {
-	// 		utils.error(err);
-	// 		console.error('No se pudo obtener el listado de ficheros', err);
-	// 	}
+			if (!silent) utils.error(result);
+		} catch (err) {
+			utils.error(err);
+			console.error('No se pudo obtener el listado de ficheros', err);
+		}
 
-	// 	return false;
-	// },
+		return false;
+	},
 	// Get media
 	'gestios/media/get': async function ({ commit }, id) {
 		try {

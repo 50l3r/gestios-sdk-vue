@@ -76,7 +76,7 @@ const actions = {
 	'gestios/media/get': async function ({ commit }, id) {
 		try {
 			utils.loader.start();
-			const result = await gestios.emails.get(id);
+			const result = await gestios.media.get(id);
 			utils.loader.done();
 
 			if (result.ok) {

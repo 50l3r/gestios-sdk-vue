@@ -92,7 +92,8 @@ export default function ({ project = '', url, events }) {
 				restore: ({ email, authcode, password }) => self.$store.dispatch('gestios/auth/restore', { email, authcode, password }),
 				logout: () => self.$store.dispatch('gestios/auth/logout'),
 				roles: (id = null) => self.$store.dispatch('gestios/roles/list', id),
-				check: ({ user = null, scopes = [], strict = true }) => self.$store.getters['gestios/roles/check']({ user, scopes, strict })
+				check: ({ user = null, scopes = [], strict = true }) => self.$store.getters['gestios/roles/check']({ user, scopes, strict }),
+				section: (item) => self.$store.getters['gestios/roles/section'](item)
 			};
 
 			// Users

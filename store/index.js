@@ -44,11 +44,11 @@ const plugins = [
 		paths: ['apps'],
 		storage: window.localStorage
 	}),
-	PersistedState({
-		key: 'gestios-items',
-		paths: ['items'],
-		storage: window.localStorage
-	}),
+	// PersistedState({
+	// 	key: 'gestios-items',
+	// 	paths: ['items'],
+	// 	storage: window.localStorage
+	// }),
 	PersistedState({
 		key: 'gestios-data',
 		paths: ['media', 'emails', 'avatars'],

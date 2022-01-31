@@ -217,12 +217,12 @@ const actions = {
 	// Add item
 	"gestios/items/add": async function (
 		{ commit },
-		{ app, params, view = null, callback = null }
+		{ app, params, view = null, callback = null, silent = false }
 	) {
 		try {
-			utils.loader.start();
+			if (!silent) utils.loader.start();
 			const result = await gestios.app(app).add(params, callback);
-			utils.loader.done();
+			if (!silent) utils.loader.done();
 
 			if (result.ok) {
 				if (!view) view = app;
@@ -231,10 +231,10 @@ const actions = {
 				return result;
 			}
 
-			utils.error(result);
+			if (!silent) utils.error(result);
 			return result;
 		} catch (err) {
-			utils.loader.done();
+			if (!silent) utils.loader.done();
 			console.error(`No se pudo añadir el registro a ${app}`, err);
 			return err;
 		}
@@ -242,24 +242,24 @@ const actions = {
 	// Edit item
 	"gestios/items/edit": async function (
 		{ commit },
-		{ app, id, params, callback = null }
+		{ app, id, params, callback = null, silent = false }
 	) {
 		try {
-			utils.loader.start();
+			if (!silent) utils.loader.start();
 			const result = await gestios
 				.app(app)
 				.edit({ id, params, callback });
-			utils.loader.done();
+			if (!silent) utils.loader.done();
 
 			if (result.ok) {
 				commit("GESTIOS/ITEMS/EDIT", { app, data: [result.data] });
 				return result;
 			}
 
-			utils.error(result);
+			if (!silent) utils.error(result);
 			return result;
 		} catch (err) {
-			utils.loader.done();
+			if (!silent) utils.loader.done();
 			console.error(`No se pudo modificar el registro ${id}:${app}`, err);
 			return err;
 		}

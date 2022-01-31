@@ -318,14 +318,19 @@ export default function ({ project = "", url, events }) {
 							id,
 							silent,
 						}),
-					add: ({ params, view = null, callback = null }) =>
+					add: ({
+						params,
+						view = null,
+						callback = null,
+						silent = false,
+					}) =>
 						this.$store.dispatch("gestios/items/add", {
 							app,
 							params,
 							view,
 							callback,
 						}),
-					edit: ({ id, params, callback = null }) =>
+					edit: ({ id, params, callback = null, silent = false }) =>
 						this.$store.dispatch("gestios/items/edit", {
 							app,
 							id,

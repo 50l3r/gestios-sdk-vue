@@ -194,7 +194,7 @@ const actions = {
 	// Get app item by ID
 	"gestios/items/get": async function (
 		{ commit },
-		{ app, id, silent = false }
+		{ app, id, silent = false, view = null }
 	) {
 		try {
 			if (!silent) utils.loader.start();
@@ -203,6 +203,15 @@ const actions = {
 
 			if (result.ok) {
 				commit("GESTIOS/ITEMS/EDIT", { app, data: [result.data] });
+				if(view){
+					commit("GESTIOS/ITEMS/LIST", {
+						view,
+						app,
+						data: [result.data],
+						total: result.total,
+						reset: false,
+					});
+				}
 				return result;
 			}
 

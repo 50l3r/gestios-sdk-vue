@@ -312,11 +312,12 @@ export default function ({ project = "", url, events }) {
 							reset,
 							view,
 						}),
-					get: (id, silent = false) =>
+					get: (id, silent = false, view = false) =>
 						this.$store.dispatch("gestios/items/get", {
 							app,
 							id,
 							silent,
+							view
 						}),
 					add: ({
 						params,
@@ -373,6 +374,21 @@ export default function ({ project = "", url, events }) {
 							silent,
 							fields,
 						}),
+					comments(entityId = null) {
+						return {
+							async list(page = 1) {
+								return sdk.app(app).comments(entityId).list(page);
+							},
+
+							async add(message) {
+								return sdk.app(app).comments(entityId).add(message);
+							},
+
+							async delete(id) {
+								return sdk.app(app).comments().delete(id);
+							},
+						};
+					}
 				};
 			},
 		},

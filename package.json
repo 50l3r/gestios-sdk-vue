@@ -1,6 +1,6 @@
 {
 	"name": "gestios-sdk-vue",
-	"version": "0.40.0",
+	"version": "0.42.0",
 	"description": "GestiOS VUE 2.0 SDK",
 	"main": "index.js",
 	"publishConfig": {
@@ -25,7 +25,8 @@
 		"url": "https://github.com/50l3r/gestios-sdk-vue/issues"
 	},
 	"dependencies": {
-		"gestios-sdk-js": "^0.81.1",
+		"gestios-sdk-js": "^0.82.1",
+		"gestios-sdk-vue": "^0.40.0",
 		"vue": "^2.6.12",
 		"vuex": "^3.5.1",
 		"vuex-persistedstate": "^4.0.0-beta.1"
@@ -33,11 +34,6 @@
 	"devDependencies": {
 		"babel-eslint": "^10.1.0",
 		"babel-plugin-import": "^1.13.0",
-		"eslint": "^7.7.0",
-		"eslint-config-airbnb-base": "^14.2.0",
-		"eslint-config-calltek": "^1.2.2",
-		"eslint-import-resolver-alias": "^1.1.2",
-		"eslint-plugin-import": "^2.22.0",
-		"eslint-plugin-vue": "^6.2.2"
+		"eslint": "^7.7.0"
 	}
 }

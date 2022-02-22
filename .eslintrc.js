@@ -12,13 +12,6 @@ module.exports = {
 	parserOptions: {
 		parser: 'babel-eslint'
 	},
-	extends: ['calltek', 'calltek/vue'],
-	rules: {},
-	settings: {
-		'import/resolver': {
-			alias: {
-				extensions: ['.js']
-			}
-		}
-	}
+	extends: ['eslint:recommended'],
+	rules: {}
 };

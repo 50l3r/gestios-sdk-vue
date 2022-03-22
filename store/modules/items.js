@@ -5,10 +5,10 @@ import utils from "../../config/utils";
 const state = {
 	vault: [
 		// {
-		// 	app: 'appname',
+		//	app: 'appname',
 		//	view: 'appnameList',
-		// 	total: 0,
-		// 	results: []
+		//	total: 0,
+		//	results: []
 		// }
 	],
 };
@@ -174,10 +174,11 @@ const actions = {
 			}
 
 			if (result.code === 404) {
+				result.data = [];
 				commit("GESTIOS/ITEMS/LIST", {
 					view,
 					app,
-					data: [],
+					data: result.data,
 					total: 0,
 					reset,
 				});
@@ -226,7 +227,7 @@ const actions = {
 	// Add item
 	"gestios/items/add": async function (
 		{ commit },
-		{ app, params, view = null, callback = null, silent = false }
+		{ app, params, view = null, callback = null, silent = false, relationalFieldFakeResponse = [] }
 	) {
 		try {
 			if (!silent) utils.loader.start();
@@ -235,6 +236,16 @@ const actions = {
 
 			if (result.ok) {
 				if (!view) view = app;
+
+				if (Array.isArray(relationalFieldFakeResponse)) {
+					for (const i in relationalFieldFakeResponse) {
+						const fieldName = relationalFieldFakeResponse[i];
+						result.data[fieldName] = JSON.parse(params[fieldName]);
+					}
+				} else {
+						const fieldName = relationalFieldFakeResponse;
+						result.data[fieldName] = JSON.parse(params[fieldName]);
+				}
 
 				commit("GESTIOS/ITEMS/ADD", { view, data: result.data });
 				return result;

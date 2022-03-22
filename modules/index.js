@@ -324,12 +324,14 @@ export default function ({ project = "", url, events }) {
 						view = null,
 						callback = null,
 						silent = false,
+						relationalFieldFakeResponse = [],
 					}) =>
 						this.$store.dispatch("gestios/items/add", {
 							app,
 							params,
 							view,
 							callback,
+							relationalFieldFakeResponse,
 						}),
 					edit: ({ id, params, callback = null, silent = false }) =>
 						this.$store.dispatch("gestios/items/edit", {
